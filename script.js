@@ -1,9 +1,15 @@
 const userRepo = "https://api.github.com/users"
 
 function getResults(username) {
-    fetch(`${userRepo}\/${username}\/repos`, {mode: 'no-cors'})
-    .then(response => response.json())
-    .then(responseJson => console.log(responseJson))
+    fetch(`${userRepo}\/${username}\/repos`)
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(responseJson => displayResults(responseJson))
+    .catch(error => $('#results-list').text(`Something went wrong: ${error.message}`))
 }
 
 function displayResults(responseJson) {
