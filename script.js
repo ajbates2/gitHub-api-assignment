@@ -1,10 +1,19 @@
-const userRepo = "https://api.github.com/users/"
+const userRepo = "https://api.github.com/users"
 
 function getResults(username) {
     fetch(`${userRepo}\/${username}\/repos`, {mode: 'no-cors'})
     .then(response => response.json())
-    .then(responseJson => console.log(responseJson))
-    .catch(error => $('.error-message').html(error.message))
+    .then(responseJson => displayResults(responseJson))
+    .catch(error => console.log(error))
+}
+
+function displayResults(responseJson) {
+    $('#results-list').empty();
+    for(let i = 0; i < responseJson.length; i++) {
+        $('#results-list').append(
+        `<li><a href="${responseJson[i].html_url}">${responseJson[i].name}</a>`)
+    };
+    $('#results').removeClass('hidden');
 }
 
 function watchForm() {
