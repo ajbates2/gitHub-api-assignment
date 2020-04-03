@@ -4,7 +4,6 @@ function getResults(username) {
     fetch(`${userRepo}\/${username}\/repos`, {mode: 'no-cors'})
     .then(response => response.json())
     .then(responseJson => console.log(responseJson))
-    .catch(error => console.log(error))
 }
 
 function displayResults(responseJson) {
