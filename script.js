@@ -3,7 +3,7 @@ const userRepo = "https://api.github.com/users"
 function getResults(username) {
     fetch(`${userRepo}\/${username}\/repos`, {mode: 'no-cors'})
     .then(response => response.json())
-    .then(responseJson => displayResults(responseJson))
+    .then(responseJson => console.log(responseJson))
     .catch(error => console.log(error))
 }
 
